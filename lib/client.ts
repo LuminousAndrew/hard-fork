@@ -3,7 +3,7 @@ import { xdcTestnet } from 'viem/chains';
 
 export const publicClient = createPublicClient({
   chain: xdcTestnet,
-  transport: http(),
+  transport: http('https://erpc.apothem.network'),
 });
 
 export const getWalletClient = async () => {
