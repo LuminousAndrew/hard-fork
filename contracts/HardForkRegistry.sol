@@ -8,13 +8,14 @@ contract HardForkRegistry {
     }
 
     mapping(address => UserProfile) public profiles;
-    mapping(string => address) public usernameToAddress; // Added for Search
+    mapping(string => address) public usernameToAddress;
 
-    function claimHandle(string memory _username) public {
+    // Change function name and args to match your frontend call
+    function registerProfile(string memory _username, string memory _metadataCID) public {
         require(bytes(_username).length > 0, "Username empty");
         require(usernameToAddress[_username] == address(0), "Handle taken");
 
-        profiles[msg.sender] = UserProfile(_username, "");
+        profiles[msg.sender] = UserProfile(_username, _metadataCID);
         usernameToAddress[_username] = msg.sender;
     }
 

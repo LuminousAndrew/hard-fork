@@ -17,7 +17,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm
 ;
 const publicClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$createPublicClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createPublicClient"])({
     chain: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$chains$2f$definitions$2f$xdcTestnet$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["xdcTestnet"],
-    transport: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$transports$2f$http$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["http"])()
+    transport: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$viem$2f$_esm$2f$clients$2f$transports$2f$http$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["http"])('https://erpc.apothem.network')
 });
 const getWalletClient = async ()=>{
     if (("TURBOPACK compile-time value", "object") !== 'undefined' && window.ethereum) {
@@ -77,7 +77,7 @@ function ClaimHandle({ account, onSuccess }) {
             const client = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getWalletClient"])();
             if (!client) return;
             const hash = await client.writeContract({
-                address: ("TURBOPACK compile-time value", "0x7af3770521f9d8974973e2df07bafb2dca348b8c"),
+                address: ("TURBOPACK compile-time value", "0xef261583b45a6dc0ff38586c4dca6a456b38d899"),
                 abi: REGISTRY_ABI,
                 functionName: 'registerProfile',
                 args: [
@@ -229,7 +229,7 @@ function ProfileHeader({ account }) {
                 "ProfileHeader.useEffect.fetchProfile": async ()=>{
                     try {
                         const [name] = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["publicClient"].readContract({
-                            address: ("TURBOPACK compile-time value", "0x7af3770521f9d8974973e2df07bafb2dca348b8c"),
+                            address: ("TURBOPACK compile-time value", "0xef261583b45a6dc0ff38586c4dca6a456b38d899"),
                             abi: REGISTRY_ABI,
                             functionName: 'getProfile',
                             args: [
@@ -366,7 +366,7 @@ function CreatePost({ account, onSuccess }) {
             const client = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getWalletClient"])();
             if (!client) return;
             const hash = await client.writeContract({
-                address: ("TURBOPACK compile-time value", "0x59ab38ea79e550377a8f3567039214a683dcd4f8"),
+                address: ("TURBOPACK compile-time value", "0xa61aed2053f60a517bda29a18ab06acb96e5ccd5"),
                 abi: POST_ABI,
                 functionName: 'createPost',
                 args: [
@@ -522,7 +522,7 @@ function VentureCard({ post, userAccount }) {
                 "VentureCard.useEffect.getHandle": async ()=>{
                     try {
                         const result = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["publicClient"].readContract({
-                            address: ("TURBOPACK compile-time value", "0x7af3770521f9d8974973e2df07bafb2dca348b8c"),
+                            address: ("TURBOPACK compile-time value", "0xef261583b45a6dc0ff38586c4dca6a456b38d899"),
                             abi: REGISTRY_ABI,
                             functionName: 'getProfile',
                             args: [
@@ -547,7 +547,7 @@ function VentureCard({ post, userAccount }) {
             const client = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getWalletClient"])();
             if (!client) return;
             const hash = await client.writeContract({
-                address: ("TURBOPACK compile-time value", "0xd2460d625d5a0fdc5fa71d5cd36693655496ad41"),
+                address: ("TURBOPACK compile-time value", "0x168a8bee28819c96d18793e2eaec44bd565a5594"),
                 abi: SPLITTER_ABI,
                 functionName: 'supportCreator',
                 args: [
@@ -729,12 +729,12 @@ function Home() {
     const [hasHandle, setHasHandle] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [posts, setPosts] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    const [foundAddress, setFoundAddress] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    // Track if we are looking at a specific portfolio
     const [viewedProfile, setViewedProfile] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [isConnecting, setIsConnecting] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    // 1. Fetch Posts Logic (Public)
     const fetchPosts = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "Home.useCallback[fetchPosts]": async ()=>{
-            const postAddr = ("TURBOPACK compile-time value", "0x59ab38ea79e550377a8f3567039214a683dcd4f8");
+            const postAddr = ("TURBOPACK compile-time value", "0xa61aed2053f60a517bda29a18ab06acb96e5ccd5");
             if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
             ;
             try {
@@ -789,18 +789,72 @@ function Home() {
             }
         }
     }["Home.useCallback[fetchPosts]"], []);
+    // 2. Check Handle Logic (Authenticated)
+    const checkHandle = async (address)=>{
+        try {
+            const profile = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["publicClient"].readContract({
+                address: ("TURBOPACK compile-time value", "0xef261583b45a6dc0ff38586c4dca6a456b38d899"),
+                abi: [
+                    {
+                        name: 'getProfile',
+                        type: 'function',
+                        stateMutability: 'view',
+                        inputs: [
+                            {
+                                name: '_user',
+                                type: 'address'
+                            }
+                        ],
+                        outputs: [
+                            {
+                                name: 'username',
+                                type: 'string'
+                            }
+                        ]
+                    }
+                ],
+                functionName: 'getProfile',
+                args: [
+                    address
+                ]
+            });
+            setHasHandle(!!profile);
+        } catch (e) {
+            setHasHandle(false);
+        }
+    };
+    // 3. Connection Logic
+    const connectWallet = async ()=>{
+        setIsConnecting(true);
+        try {
+            const client = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getWalletClient"])();
+            if (!client) {
+                alert("Please install a wallet like MetaMask!");
+                return;
+            }
+            const [addr] = await client.requestAddresses();
+            if (addr) {
+                setAccount(addr);
+                await checkHandle(addr);
+            }
+        } catch (e) {
+            console.error("Connection failed", e);
+        } finally{
+            setIsConnecting(false);
+        }
+    };
+    // 4. Public Search Logic
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Home.useEffect": ()=>{
             const searchHandle = {
                 "Home.useEffect.searchHandle": async ()=>{
                     if (!searchQuery) {
-                        setFoundAddress(null);
                         setViewedProfile(null);
                         return;
                     }
                     try {
                         const addr = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["publicClient"].readContract({
-                            address: ("TURBOPACK compile-time value", "0x7af3770521f9d8974973e2df07bafb2dca348b8c"),
+                            address: ("TURBOPACK compile-time value", "0xef261583b45a6dc0ff38586c4dca6a456b38d899"),
                             abi: [
                                 {
                                     name: 'usernameToAddress',
@@ -822,21 +876,18 @@ function Home() {
                             ],
                             functionName: 'usernameToAddress',
                             args: [
-                                searchQuery
+                                searchQuery.toLowerCase()
                             ]
                         });
                         if (addr && addr !== '0x0000000000000000000000000000000000000000') {
-                            setFoundAddress(addr);
-                            setViewedProfile(addr); // Automatically jump to their portfolio
-                        } else {
-                            setFoundAddress(null);
+                            setViewedProfile(addr);
                         }
                     } catch (e) {
-                        setFoundAddress(null);
+                        console.error("Search error", e);
                     }
                 }
             }["Home.useEffect.searchHandle"];
-            const delay = setTimeout(searchHandle, 400);
+            const delay = setTimeout(searchHandle, 500);
             return ({
                 "Home.useEffect": ()=>clearTimeout(delay)
             })["Home.useEffect"];
@@ -844,55 +895,14 @@ function Home() {
     }["Home.useEffect"], [
         searchQuery
     ]);
+    // Initial load
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Home.useEffect": ()=>{
             fetchPosts();
-            ({
-                "Home.useEffect": async ()=>{
-                    const client = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getWalletClient"])();
-                    if (client) {
-                        const [addr] = await client.getAddresses();
-                        if (addr) {
-                            setAccount(addr);
-                            checkHandle(addr);
-                        }
-                    }
-                }
-            })["Home.useEffect"]();
         }
     }["Home.useEffect"], [
         fetchPosts
     ]);
-    const checkHandle = async (address)=>{
-        const profile = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["publicClient"].readContract({
-            address: ("TURBOPACK compile-time value", "0x7af3770521f9d8974973e2df07bafb2dca348b8c"),
-            abi: [
-                {
-                    name: 'getProfile',
-                    type: 'function',
-                    stateMutability: 'view',
-                    inputs: [
-                        {
-                            name: '_user',
-                            type: 'address'
-                        }
-                    ],
-                    outputs: [
-                        {
-                            name: 'username',
-                            type: 'string'
-                        }
-                    ]
-                }
-            ],
-            functionName: 'getProfile',
-            args: [
-                address
-            ]
-        });
-        setHasHandle(!!profile);
-    };
-    // Filter logic for the portfolio view
     const displayPosts = viewedProfile ? posts.filter((p)=>p.author.toLowerCase() === viewedProfile.toLowerCase()) : posts;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
         className: "min-h-screen bg-black text-white p-6 pb-24",
@@ -904,93 +914,128 @@ function Home() {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex justify-between items-center",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                onClick: ()=>{
-                                    setViewedProfile(null);
-                                    setSearchQuery("");
-                                },
-                                className: "text-4xl font-black italic tracking-tighter cursor-pointer",
-                                children: "HARD FORK"
-                            }, void 0, false, {
-                                fileName: "[project]/app/page.tsx",
-                                lineNumber: 95,
-                                columnNumber: 13
-                            }, this)
-                        }, void 0, false, {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                                    onClick: ()=>{
+                                        setViewedProfile(null);
+                                        setSearchQuery("");
+                                    },
+                                    className: "text-4xl font-black italic tracking-tighter cursor-pointer hover:opacity-80 transition-opacity",
+                                    children: "HARD FORK"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 119,
+                                    columnNumber: 13
+                                }, this),
+                                !account && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: connectWallet,
+                                    disabled: isConnecting,
+                                    className: "bg-white text-black px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-all active:scale-95",
+                                    children: isConnecting ? "Connecting..." : "Connect"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 127,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 94,
+                            lineNumber: 118,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "relative",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 type: "text",
-                                placeholder: "Search creator portfolio...",
+                                placeholder: "Search creator handle...",
                                 value: searchQuery,
                                 onChange: (e)=>setSearchQuery(e.target.value),
                                 className: "w-full bg-zinc-900 border border-zinc-800 p-5 rounded-[2rem] text-white outline-none focus:border-blue-600 transition-all font-medium"
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 99,
+                                lineNumber: 138,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 98,
+                            lineNumber: 137,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 93,
+                    lineNumber: 117,
                     columnNumber: 9
                 }, this),
-                !account ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                    className: "w-full py-20 border-2 border-dashed border-zinc-800 rounded-[3rem] text-zinc-500 font-bold",
-                    children: "Connect Wallet"
-                }, void 0, false, {
-                    fileName: "[project]/app/page.tsx",
-                    lineNumber: 110,
-                    columnNumber: 11
-                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "space-y-8",
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "space-y-12",
                     children: [
-                        !viewedProfile ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                        account && !viewedProfile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "space-y-8 animate-in fade-in slide-in-from-top-4 duration-500",
                             children: [
                                 hasHandle ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ProfileHeader$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     account: account
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 116,
-                                    columnNumber: 30
+                                    lineNumber: 153,
+                                    columnNumber: 17
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ClaimHandle$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     account: account,
                                     onSuccess: ()=>checkHandle(account)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 116,
-                                    columnNumber: 68
+                                    lineNumber: 155,
+                                    columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CreatePost$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     account: account,
                                     onSuccess: fetchPosts
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 117,
-                                    columnNumber: 17
+                                    lineNumber: 157,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
+                                    className: "border-zinc-900"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 158,
+                                    columnNumber: 15
                                 }, this)
                             ]
-                        }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: ()=>{
-                                setViewedProfile(null);
-                                setSearchQuery("");
-                            },
-                            className: "text-blue-500 font-black text-xs uppercase tracking-widest mb-4 hover:text-white transition-all",
-                            children: "← Back to Main Feed"
-                        }, void 0, false, {
+                        }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 120,
-                            columnNumber: 15
+                            lineNumber: 151,
+                            columnNumber: 13
+                        }, this),
+                        viewedProfile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex items-center justify-between",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>{
+                                        setViewedProfile(null);
+                                        setSearchQuery("");
+                                    },
+                                    className: "text-blue-500 font-black text-xs uppercase tracking-widest hover:text-white transition-all",
+                                    children: "← Back to Main Feed"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 165,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "text-zinc-600 text-xs font-bold uppercase tracking-widest",
+                                    children: "Public Portfolio"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 171,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 164,
+                            columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "space-y-8",
@@ -999,43 +1044,43 @@ function Home() {
                                         ...p,
                                         imageCID: p.mediaHash
                                     },
-                                    userAccount: account
+                                    userAccount: account || "0x0000000000000000000000000000000000000000"
                                 }, i, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 131,
-                                    columnNumber: 19
+                                    lineNumber: 181,
+                                    columnNumber: 17
                                 }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "text-center py-20 bg-zinc-900/50 rounded-[3rem] border border-dashed border-zinc-800 text-zinc-600 uppercase font-black text-sm tracking-widest",
-                                children: "No portfolio content found"
+                                children: viewedProfile ? "No content found for this user" : "Establishing network connection..."
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 134,
-                                columnNumber: 17
+                                lineNumber: 188,
+                                columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 128,
-                            columnNumber: 13
+                            lineNumber: 178,
+                            columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 112,
-                    columnNumber: 11
+                    lineNumber: 148,
+                    columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 92,
+            lineNumber: 116,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 91,
+        lineNumber: 115,
         columnNumber: 5
     }, this);
 }
-_s(Home, "BKz6cvHAab/dUJ0aHnQUgQJkLIE=");
+_s(Home, "j0RMqijGdjwg7JlMELJYa9WamIM=");
 _c = Home;
 var _c;
 __turbopack_context__.k.register(_c, "Home");
