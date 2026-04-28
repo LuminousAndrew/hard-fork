@@ -23,7 +23,7 @@ export default function Home() {
   const [viewedProfile, setViewedProfile] = useState<string | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
 
-  // 1. Fetch Posts Logic
+  // 1. Fetch Posts Logic (Public)
   const fetchPosts = useCallback(async () => {
     const postAddr = process.env.NEXT_PUBLIC_POSTS_ADDR;
     if (!postAddr || postAddr === '0x0000000000000000000000000000000000000000') return;
@@ -40,7 +40,7 @@ export default function Home() {
     }
   }, []);
 
-  // 2. Check Handle Logic
+  // 2. Check Handle Logic (Authenticated)
   const checkHandle = async (address: string) => {
     try {
       const profile = await publicClient.readContract({
@@ -55,7 +55,7 @@ export default function Home() {
     }
   };
 
-  // 3. Manual Wallet Connection (Prevents silent blocking)
+  // 3. Connection Logic
   const connectWallet = async () => {
     setIsConnecting(true);
     try {
@@ -64,12 +64,10 @@ export default function Home() {
         alert("Please install a wallet like MetaMask!");
         return;
       }
-      // Requesting addresses triggers the wallet popup
       const [addr] = await client.requestAddresses();
       if (addr) {
         setAccount(addr);
         await checkHandle(addr);
-        await fetchPosts();
       }
     } catch (e) {
       console.error("Connection failed", e);
@@ -78,7 +76,7 @@ export default function Home() {
     }
   };
 
-  // 4. Search & Portfolio Logic
+  // 4. Public Search Logic
   useEffect(() => {
     const searchHandle = async () => {
       if (!searchQuery) {
@@ -90,7 +88,7 @@ export default function Home() {
           address: process.env.NEXT_PUBLIC_REGISTRY_ADDR as `0x${string}`,
           abi: [{ name: 'usernameToAddress', type: 'function', stateMutability: 'view', inputs: [{ name: '', type: 'string' }], outputs: [{ name: '', type: 'address' }] }],
           functionName: 'usernameToAddress',
-          args: [searchQuery],
+          args: [searchQuery.toLowerCase()],
         }) as `0x${string}`;
 
         if (addr && addr !== '0x0000000000000000000000000000000000000000') {
@@ -104,7 +102,7 @@ export default function Home() {
     return () => clearTimeout(delay);
   }, [searchQuery]);
 
-  // Load feed on mount
+  // Initial load
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
@@ -124,6 +122,16 @@ export default function Home() {
             >
               HARD FORK
             </h1>
+            
+            {!account && (
+              <button 
+                onClick={connectWallet}
+                disabled={isConnecting}
+                className="bg-white text-black px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-all active:scale-95"
+              >
+                {isConnecting ? "Connecting..." : "Connect"}
+              </button>
+            )}
           </div>
           
           <div className="relative">
@@ -137,48 +145,52 @@ export default function Home() {
           </div>
         </header>
 
-        {!account ? (
-          <button 
-            onClick={connectWallet}
-            disabled={isConnecting}
-            className="w-full py-20 border-2 border-dashed border-zinc-800 rounded-[3rem] text-zinc-500 font-bold hover:border-blue-600 hover:text-blue-600 transition-all active:scale-[0.98]"
-          >
-            {isConnecting ? "Waking up Wallet..." : "Connect Wallet"}
-          </button>
-        ) : (
+        <div className="space-y-12">
+          {/* USER ACTIONS: Hidden if not logged in or if viewing another portfolio */}
+          {account && !viewedProfile && (
+            <div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-500">
+              {hasHandle ? (
+                <ProfileHeader account={account} />
+              ) : (
+                <ClaimHandle account={account} onSuccess={() => checkHandle(account)} />
+              )}
+              <CreatePost account={account} onSuccess={fetchPosts} />
+              <hr className="border-zinc-900" />
+            </div>
+          )}
+
+          {/* VIEWING PORTFOLIO INDICATOR */}
+          {viewedProfile && (
+            <div className="flex items-center justify-between">
+              <button 
+                onClick={() => { setViewedProfile(null); setSearchQuery(""); }}
+                className="text-blue-500 font-black text-xs uppercase tracking-widest hover:text-white transition-all"
+              >
+                ← Back to Main Feed
+              </button>
+              <span className="text-zinc-600 text-xs font-bold uppercase tracking-widest">
+                Public Portfolio
+              </span>
+            </div>
+          )}
+
+          {/* GLOBAL FEED: Always visible */}
           <div className="space-y-8">
-            {!viewedProfile ? (
-               <>
-                {hasHandle ? <ProfileHeader account={account} /> : <ClaimHandle account={account} onSuccess={() => checkHandle(account)} />}
-                <CreatePost account={account} onSuccess={fetchPosts} />
-               </>
+            {displayPosts.length > 0 ? (
+              displayPosts.map((p, i) => (
+                <VentureCard 
+                  key={i} 
+                  post={{...p, imageCID: p.mediaHash}} 
+                  userAccount={account || "0x0000000000000000000000000000000000000000"} 
+                />
+              ))
             ) : (
-              <div className="flex items-center justify-between mb-4">
-                <button 
-                  onClick={() => { setViewedProfile(null); setSearchQuery(""); }}
-                  className="text-blue-500 font-black text-xs uppercase tracking-widest hover:text-white transition-all"
-                >
-                  ← Back to Main Feed
-                </button>
-                <span className="text-zinc-600 text-xs font-bold uppercase tracking-widest">
-                  Viewing Portfolio
-                </span>
+              <div className="text-center py-20 bg-zinc-900/50 rounded-[3rem] border border-dashed border-zinc-800 text-zinc-600 uppercase font-black text-sm tracking-widest">
+                {viewedProfile ? "No content found for this user" : "Establishing network connection..."}
               </div>
             )}
-
-            <div className="space-y-8">
-              {displayPosts.length > 0 ? (
-                displayPosts.map((p, i) => (
-                  <VentureCard key={i} post={{...p, imageCID: p.mediaHash}} userAccount={account} />
-                ))
-              ) : (
-                <div className="text-center py-20 bg-zinc-900/50 rounded-[3rem] border border-dashed border-zinc-800 text-zinc-600 uppercase font-black text-sm tracking-widest">
-                  {viewedProfile ? "This creator has no content" : "The feed is empty"}
-                </div>
-              )}
-            </div>
           </div>
-        )}
+        </div>
       </div>
     </main>
   );
